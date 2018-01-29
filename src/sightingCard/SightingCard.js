@@ -10,16 +10,14 @@ class SightingCard extends Component {
 
     render() {
         const sighting = this.props.sighting;
-        console.log("Sighting::", sighting);
-        console.log("SightingDate", sighting.date);
         return (
-            <Col md="4">
+            <Col xs="12" sm="6" md="4">
                 <Card className="sighting-card">
                     <CardTitle>
                         {sighting.breed}
                     </CardTitle>
                     <CardSubtitle>
-                        {sighting.date}
+                        {sighting.datetime.format("MMM Do YYYY, HH:mm:ss")}
                     </CardSubtitle>
                     <CardText>
                         {sighting.comment}
