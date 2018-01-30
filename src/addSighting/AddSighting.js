@@ -1,27 +1,37 @@
 import React, {Component} from 'react';
-import {
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Button
-} from 'reactstrap';
+import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import DateTime from 'react-datetime';
+import moment from 'moment';
 
 import '../../node_modules/react-datetime/css/react-datetime.css';
 import breeds from '../res/catBreeds';
+import sightings from "../res/sightings";
 
 
 class AddSighting extends Component {
     constructor(props) {
         super(props);
 
+        const sortedBreeds = breeds.sort(this.sortAlphabetically);
+
         this.state = {
-            breed: null,
-            date: null,
-            sighting: null
+            breed: sortedBreeds[0],
+            datetime: moment(),
+            comment: ""
         }
     }
+
+    createId = () => {
+        let idArray = sightings.map(sighting => {
+            return sighting.id;
+        });
+
+        const catId = idArray[idArray.length - 1] + 1;
+
+        this.setState({
+            id: catId
+        })
+    };
 
     sortAlphabetically = (a, b) => {
         if (a < b) return -1;
@@ -29,16 +39,22 @@ class AddSighting extends Component {
         return 0;
     };
 
-    onDateChange = date => {
-        console.log(date);
+    onValueChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     };
 
-    onBreedSelected = breed => {
-
+    onDateChange = moment => {
+        this.setState({
+            datetime: moment
+        })
     };
 
     addSighting = () => {
-
+        this.createId();
+        sightings.push(this.state);
+        this.props.history.push('/');
     };
 
     render() {
@@ -48,7 +64,7 @@ class AddSighting extends Component {
                 <Form>
                     <FormGroup>
                         <Label for="breed">Cat breed</Label>
-                        <Input type="select" name="breed" id="breed">
+                        <Input type="select" name="breed" id="breed" onChange={this.onValueChange}>
                             {
                                 breeds.sort(this.sortAlphabetically).map((breed, index) => {
                                     return <option key={index}>{breed}</option>
@@ -62,13 +78,14 @@ class AddSighting extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="comment">Comment</Label>
-                        <Input type="textarea" name="comment" id="comment" />
+                        <Input type="textarea" name="comment" id="comment" onChange={this.onValueChange}/>
                     </FormGroup>
-                    <Button color="primary">Submit</Button>
+                    <Button color="primary" onClick={this.addSighting}>Submit</Button>
                 </Form>
             </div>
         )
     }
+
 }
 
 export default AddSighting;

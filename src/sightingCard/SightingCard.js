@@ -11,7 +11,7 @@ class SightingCard extends Component {
     render() {
         const sighting = this.props.sighting;
         return (
-            <Col xs="12" sm="6" md="4">
+            <Col xs="12" sm="6" xl="4">
                 <Card className="sighting-card">
                     <CardTitle>
                         {sighting.breed}

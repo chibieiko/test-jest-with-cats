@@ -9,6 +9,7 @@ class MyNavbar extends Component {
         return (
             <React.Fragment>
                 <Navbar color="faded" light expanded="md">
+                    <span className="container">
                     <NavbarBrand href="/">Cat sightings</NavbarBrand>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
@@ -17,6 +18,7 @@ class MyNavbar extends Component {
                             </Link>
                         </NavItem>
                     </Nav>
+                    </span>
                 </Navbar>
             </React.Fragment>
         );
