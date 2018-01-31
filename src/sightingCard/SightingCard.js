@@ -2,12 +2,9 @@ import React, {Component} from 'react';
 import {Button, Card, CardSubtitle, CardText, CardTitle, Col} from 'reactstrap';
 
 import './SightingCard.css';
+import sightings from '../res/sightings';
 
 class SightingCard extends Component {
-    removeSighting = id => {
-
-    };
-
     render() {
         const sighting = this.props.sighting;
         return (
@@ -22,7 +19,7 @@ class SightingCard extends Component {
                     <CardText>
                         {sighting.comment}
                     </CardText>
-                    <Button outline color="danger" onClick={() => this.removeSighting(sighting.id)}>Remove</Button>
+                    <Button outline color="danger" onClick={() => this.props.removeSighting(sighting.id)}>Remove</Button>
                 </Card>
             </Col>
         )

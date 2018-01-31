@@ -1,12 +1,16 @@
 import React from 'react';
-import AddSighting from './AddSighting';
-import sightings from '../res/sightings';
 import moment from 'moment';
 import renderer from 'react-test-renderer';
 import {createMemoryHistory} from 'history';
 
+import AddSighting from './AddSighting';
+import sightings from '../res/sightings';
 
-const component = renderer.create(<AddSighting/>);
+let component;
+
+beforeAll(() => {
+    component = renderer.create(<AddSighting/>);
+});
 
 it('should render correctly', () => {
     expect(component.toJSON()).toMatchSnapshot();
