@@ -3,6 +3,7 @@ import AddSighting from './AddSighting';
 import sightings from '../res/sightings';
 import moment from 'moment';
 import renderer from 'react-test-renderer';
+import {createMemoryHistory} from 'history';
 
 
 const component = renderer.create(<AddSighting/>);
@@ -32,14 +33,13 @@ it('should add an id to state that does not exist in sightings list', () => {
 });
 
 it('should add a sighting to sightings list', () => {
-    const history = jest.fn();
+    const history = createMemoryHistory('/add-sighting');
     const component = renderer.create(<AddSighting history={history}/>);
     const instance = component.getInstance();
     instance.addSighting();
 
     expect(sightings).toContain(instance.state);
 });
-
 
 it('should sort array alphabetically', () => {
     const instance = component.getInstance();
