@@ -16,7 +16,7 @@ class AddSighting extends Component {
 
         this.state = {
             breed: sortedBreeds[0],
-            datetime: moment(),
+            datetime: moment('2018-01-31T09:15:00'),
             comment: ""
         }
     }
@@ -26,11 +26,7 @@ class AddSighting extends Component {
             return sighting.id;
         });
 
-        const catId = idArray[idArray.length - 1] + 1;
-
-        this.setState({
-            id: catId
-        })
+        return idArray[idArray.length - 1] + 1;
     };
 
     sortAlphabetically = (a, b) => {
@@ -52,9 +48,13 @@ class AddSighting extends Component {
     };
 
     addSighting = () => {
-        this.createId();
-        sightings.push(this.state);
+        sightings.push(this.createSighting(this.state));
         this.props.history.push('/');
+    };
+
+    createSighting = state => {
+        const id = this.createId();
+        return Object.assign({}, state, {id: id});
     };
 
     render() {
