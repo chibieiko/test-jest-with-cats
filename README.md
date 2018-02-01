@@ -27,4 +27,7 @@ Run the tests:
 ```
 npm test
 ```
+
+To update component snapshots press 'u' when the test server 
+is running.
  
